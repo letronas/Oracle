@@ -7,11 +7,13 @@ declare
     v_key_columns varchar2(32767) := 'INDEX_KEYS'; --Keys of index separated with comma
     v_pmax_tab_name varchar2(50) := 'PMAX_TBS'; --PMAX/PMIN TBS if you have a PMAX/PMIN
     v_idx_parallel varchar2(1) := 8; -- index parallel sholud be like a table parallel. default it's 1
-	p_debug_mode boolean := false;
+    p_debug_mode boolean := false;
 BEGIN
-v_sql := '';
+  v_sql := '';
+  
   -- Index partition name and table partition name is equal, but TBS postfix is a little bit different 
   -- That's why i preapare an index TBS name depends on table TBS name
+  
   for cur in (
     SELECT PARTITION_NAME, REPLACE(TABLESPACE_NAME,'_D','_I') as TABLESPACE_NAME
     FROM all_tab_partitions
